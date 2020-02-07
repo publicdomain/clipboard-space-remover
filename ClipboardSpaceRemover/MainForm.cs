@@ -7,9 +7,9 @@ namespace ClipboardSpaceRemover
 {
     // Directives
     using System;
-    using System.Collections.Generic;
     using System.Drawing;
     using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
 
     /// <summary>
@@ -49,7 +49,52 @@ namespace ClipboardSpaceRemover
         {
             // The InitializeComponent() call is required for Windows Forms designer support.
             this.InitializeComponent();
+
+            // Add clipboard listener
+            AddClipboardFormatListener(this.Handle);
         }
+
+        /// <summary>
+        /// The Window procedure.
+        /// </summary>
+        /// <param name="m">The message.</param>
+        protected override void WndProc(ref Message m)
+        {
+            // Test incoming message
+            switch (m.Msg)
+            {
+                // Check for clipboard update
+                case WmClipboardUpdate:
+
+                    // Check for copied text which contains spaces
+                    if (Clipboard.ContainsText() && Clipboard.GetText().Contains(" "))
+                    {
+                        // Remove all blank spaces
+                        Clipboard.SetText(Clipboard.GetText().Replace(" ", string.Empty));
+                    }
+
+                    // Halt flow
+                    break;
+
+                // Continue processing
+                default:
+
+                    // Pass message for 
+                    base.WndProc(ref m);
+
+                    // Halt flow
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Adds the clipboard format listener.
+        /// </summary>
+        /// <returns><c>true</c>, if clipboard format listener was added, <c>false</c> otherwise.</returns>
+        /// <param name="hwnd">The handle.</param>
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool AddClipboardFormatListener(IntPtr hwnd);
 
         /// <summary>
         /// Handles the always on top tool strip menu item click event.
@@ -122,7 +167,8 @@ namespace ClipboardSpaceRemover
         /// <param name="e">Event arguments.</param>
         private void OnExitToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Close program
+            this.Close();
         }
 
         /// <summary>
