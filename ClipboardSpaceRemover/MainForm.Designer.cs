@@ -44,6 +44,8 @@ namespace ClipboardSpaceRemover
         	this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
         	this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        	this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        	this.alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.headquartersPatreoncomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.sourceCodeGithubcomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,8 +55,6 @@ namespace ClipboardSpaceRemover
         	this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.pauseResumeButton = new System.Windows.Forms.Button();
         	this.groupBox = new System.Windows.Forms.GroupBox();
-        	this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        	this.alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.statusStrip.SuspendLayout();
         	this.menuStrip.SuspendLayout();
         	this.groupBox.SuspendLayout();
@@ -117,6 +117,23 @@ namespace ClipboardSpaceRemover
         	this.exitToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
         	this.exitToolStripMenuItem.Text = "E&xit";
         	this.exitToolStripMenuItem.Click += new System.EventHandler(this.OnExitToolStripMenuItemClick);
+        	// 
+        	// optionsToolStripMenuItem
+        	// 
+        	this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+        	        	        	this.alwaysOnTopToolStripMenuItem});
+        	this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+        	this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+        	this.optionsToolStripMenuItem.Text = "&Options";
+        	// 
+        	// alwaysOnTopToolStripMenuItem
+        	// 
+        	this.alwaysOnTopToolStripMenuItem.Checked = true;
+        	this.alwaysOnTopToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+        	this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
+        	this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+        	this.alwaysOnTopToolStripMenuItem.Text = "&Always on top";
+        	this.alwaysOnTopToolStripMenuItem.Click += new System.EventHandler(this.OnAlwaysOnTopToolStripMenuItemClick);
         	// 
         	// helpToolStripMenuItem
         	// 
@@ -194,23 +211,6 @@ namespace ClipboardSpaceRemover
         	this.groupBox.TabStop = false;
         	this.groupBox.Text = "Monitor is: ACTIVE";
         	// 
-        	// optionsToolStripMenuItem
-        	// 
-        	this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-        	        	        	this.alwaysOnTopToolStripMenuItem});
-        	this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-        	this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-        	this.optionsToolStripMenuItem.Text = "&Options";
-        	// 
-        	// alwaysOnTopToolStripMenuItem
-        	// 
-        	this.alwaysOnTopToolStripMenuItem.Checked = true;
-        	this.alwaysOnTopToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-        	this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
-        	this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-        	this.alwaysOnTopToolStripMenuItem.Text = "&Always on top";
-        	this.alwaysOnTopToolStripMenuItem.Click += new System.EventHandler(this.OnAlwaysOnTopToolStripMenuItemClick);
-        	// 
         	// MainForm
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -223,6 +223,7 @@ namespace ClipboardSpaceRemover
         	this.Name = "MainForm";
         	this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         	this.Text = "Clipboard space remover";
+        	this.TopMost = true;
         	this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnMainFormFormClosing);
         	this.statusStrip.ResumeLayout(false);
         	this.statusStrip.PerformLayout();
