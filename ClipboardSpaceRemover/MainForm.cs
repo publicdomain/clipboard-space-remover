@@ -150,7 +150,8 @@ namespace ClipboardSpaceRemover
         /// <param name="e">Event arguments.</param>
         private void OnOriginalThreadRedditcomToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Open original thread @ Reddit
+            Process.Start("https://www.reddit.com/r/software/comments/ewlypv/copypaste_on_windows_that_leaves_out_spaces/");
         }
 
         /// <summary>
