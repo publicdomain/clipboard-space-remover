@@ -7,6 +7,7 @@ namespace ClipboardSpaceRemover
 {
     // Directives
     using System;
+    using System.Diagnostics;
     using System.Drawing;
     using System.Reflection;
     using System.Runtime.InteropServices;
@@ -138,7 +139,8 @@ namespace ClipboardSpaceRemover
         /// <param name="e">Event arguments.</param>
         private void OnSourceCodeGithubcomToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Open GitHub
+            Process.Start("https://github.com/publicdomain");
         }
 
         /// <summary>
