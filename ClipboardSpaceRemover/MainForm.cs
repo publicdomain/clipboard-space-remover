@@ -45,6 +45,16 @@ namespace ClipboardSpaceRemover
         private string friendlyName = "Clipboard Space Remover";
 
         /// <summary>
+        /// The copy count.
+        /// </summary>
+        private int copyCount = 0;
+
+        /// <summary>
+        /// The space count.
+        /// </summary>
+        private int spaceCount = 0;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:ClipboardSpaceRemover.MainForm"/> class.
         /// </summary>
         public MainForm()
@@ -68,11 +78,33 @@ namespace ClipboardSpaceRemover
                 // Check for clipboard update
                 case WmClipboardUpdate:
 
-                    // Check for copied text which contains spaces
-                    if (Clipboard.ContainsText() && Clipboard.GetText().Contains(" "))
+                    // Check for copied text
+                    if (Clipboard.ContainsText())
                     {
-                        // Remove all blank spaces
-                        Clipboard.SetText(Clipboard.GetText().Replace(" ", string.Empty));
+                        // Set clipboard text variable
+                        string clipboardText = Clipboard.GetText();
+
+                        // Check for spaes
+                        if (clipboardText.Contains(" "))
+                        {
+                            // Increment copy count
+                            this.copyCount++;
+
+                            // Capture original text length
+                            int originalClipboardTextLength = clipboardText.Length;
+
+                            // Remove all blank spaces
+                            clipboardText = Clipboard.GetText().Replace(" ", string.Empty);
+
+                            // Set new text
+                            Clipboard.SetText(clipboardText);
+
+                            // Increment spaces count
+                            this.spaceCount += originalClipboardTextLength - clipboardText.Length;
+
+                            // Reflect new values
+                            this.UpdateStatusText();
+                        }
                     }
 
                     // Halt flow
@@ -106,6 +138,15 @@ namespace ClipboardSpaceRemover
         [DllImport("user32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool RemoveClipboardFormatListener(IntPtr hwnd);
+
+        /// <summary>
+        /// Updates the status text.
+        /// </summary>
+        private void UpdateStatusText()
+        {
+            // Update with current values
+            this.toolStripStatusLabel.Text = $"Copy count: {this.copyCount } / Spaces removed: {this.spaceCount}";
+        }
 
         /// <summary>
         /// Handles the always on top tool strip menu item click event.
@@ -193,7 +234,17 @@ namespace ClipboardSpaceRemover
         /// <param name="e">Event arguments.</param>
         private void OnNewToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Reset copy count
+            this.copyCount = 0;
+
+            // Reset space count
+            this.spaceCount = 0;
+
+            // Reset clipboard
+            Clipboard.Clear();
+
+            // Update status
+            this.UpdateStatusText();
         }
 
         /// <summary>
