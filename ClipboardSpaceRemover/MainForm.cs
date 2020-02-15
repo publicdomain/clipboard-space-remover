@@ -134,10 +134,10 @@ namespace ClipboardSpaceRemover
         /// Removes the clipboard format listener.
         /// </summary>
         /// <returns><c>true</c>, if clipboard format listener was removed, <c>false</c> otherwise.</returns>
-        /// <param name="hwnd">Hwnd.</param>
+        /// <param name="hwnd">The handle.</param>c
         [DllImport("user32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool RemoveClipboardFormatListener(IntPtr hwnd);
+        private static extern bool RemoveClipboardFormatListener(IntPtr hwnd);
 
         /// <summary>
         /// Updates the status text.
@@ -300,7 +300,7 @@ namespace ClipboardSpaceRemover
             var aboutForm = new AboutForm(
                 $"About {this.friendlyName}",
                 $"{this.friendlyName} {this.semanticVersion}",
-                $"Made for: u/Cracker_Z{Environment.NewLine}Reddit.com{Environment.NewLine}Week #06 @ February 2020",
+                $"Made for: u/Cracker_Z{Environment.NewLine}Reddit.com{Environment.NewLine}Week #07 @ February 2020",
                 licenseText,
                 this.Icon.ToBitmap());
 
