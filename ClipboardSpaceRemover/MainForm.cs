@@ -300,7 +300,7 @@ namespace ClipboardSpaceRemover
             var aboutForm = new AboutForm(
                 $"About {this.friendlyName}",
                 $"{this.friendlyName} {this.semanticVersion}",
-                $"Made for: u/Cracker_Z{Environment.NewLine}Reddit.com{Environment.NewLine}Week #07 @ February 2020",
+                $"Made for: u/Napim8{Environment.NewLine}Reddit.com{Environment.NewLine}Week #09 @ February 2020",
                 licenseText,
                 this.Icon.ToBitmap());
 
