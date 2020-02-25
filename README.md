@@ -1,4 +1,4 @@
-# clipboard Space Remover
+# Clipboard Space Remover
 
 Clipboard monitor removing blank spaces from copied text.
 
